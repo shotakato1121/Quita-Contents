@@ -1,15 +1,15 @@
 ---
-title: "Day7：止められないが無限にもできないシステムの設計思想整理"
+title: Day7：止められないが無限にもできないシステムの設計思想整理
 tags:
+  - Azure
+  - システム設計
   - アーキテクチャ設計
   - クラウド設計
-  - Azure
   - 可用性設計
-  - システム設計
 private: false
-updated_at: '2026-03-02T22:10:00+09:00'
-id: day7-design-for-continuity-with-cost-guardrails
-organization_url_name: ""
+updated_at: '2026-03-02T22:11:14+09:00'
+id: f6e5bf7afb7cacb7cfd9
+organization_url_name: null
 slide: false
 ignorePublish: false
 ---
