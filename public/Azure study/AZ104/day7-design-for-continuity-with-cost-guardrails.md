@@ -9,6 +9,11 @@ tags:
   - 設計耐性
   - 運用設計
 private: false
+updated_at: '2026-03-02T22:10:00+09:00'
+id: day7-design-for-continuity-with-cost-guardrails
+organization_url_name: ""
+slide: false
+ignorePublish: false
 ---
 
 # Day7：止められないが無限にもできないシステムの設計思想整理
