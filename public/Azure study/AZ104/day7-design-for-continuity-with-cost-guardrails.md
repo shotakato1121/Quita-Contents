@@ -6,8 +6,6 @@ tags:
   - Azure
   - 可用性設計
   - システム設計
-  - 設計耐性
-  - 運用設計
 private: false
 updated_at: '2026-03-02T22:10:00+09:00'
 id: day7-design-for-continuity-with-cost-guardrails
