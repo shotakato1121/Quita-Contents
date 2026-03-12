@@ -1,89 +1,56 @@
 ---
-title: 基礎編1：Subscription / Resource Group / Region / Resource の使い分け
+title: AZ-104 学習ログ Day1：Subscription / Resource Group / Region / Resource の使い分け
 tags:
   - Azure
-  - 初心者
-  - インフラ
+  - Subscription
   - AZ104
-  - クラウド設計
+  - 学習ログ
+  - Azure基礎
 private: false
-updated_at: '2026-03-04T22:28:43+09:00'
+updated_at: '2026-03-12T22:05:23+09:00'
 id: f071652bc660487aedec
 organization_url_name: null
 slide: false
 ignorePublish: false
 ---
 
-# はじめに
+# AZ-104 学習ログ Day1：Subscription / Resource Group / Region / Resource の使い分け
 
-Azure学習の最初の論点は、サービス名より先に
-「管理の境界をどう切るか」を理解することだった。
+## はじめに
+Azureの学習を始めるとき、サービス名より先に「管理の境界をどう切るか」を整理しておくと迷いが減る。今回は Subscription / Resource Group / Region / Resource の4要素を、運用設計の視点でまとめる。
 
-この記事では、次の4要素だけに絞って整理する。
-
-- Subscription
-- Resource Group
-- Region
-- Resource
-
----
-
-# 1. Subscription
-
-Subscriptionは、Azure運用における主要な管理境界。
-
-主な役割は以下。
+## 本文
+### Subscription
+Subscription は Azure 運用の大きな管理境界で、主に次の役割を持つ。
 
 - 課金の集計単位
 - 権限付与の大きなスコープ
 - 運用責任の分離単位
 
-実務では「部署単位」だけでなく、
-「本番/開発」や「事業ドメイン」で分けることも多い。
+実務では「部署単位」だけでなく、「本番/開発」「事業ドメイン」で分けることも多い。
 
----
-
-# 2. Resource Group
-
-Resource Groupは、リソースの運用単位。
-
-基本は次のルールで切る。
+### Resource Group
+Resource Group はリソースの運用単位。基本は次のルールで切る。
 
 - 同じライフサイクルで変更・削除するものをまとめる
 - 同じ運用チームが扱うものをまとめる
 
-よくある誤りは「サービス種別」で分けること。
-運用でまとめて扱えない構成になりやすい。
+「サービス種別」で分けると、運用でまとめて扱えない構成になりやすいので注意する。
 
----
-
-# 3. Region
-
-Regionは管理階層ではなく、配置場所の選択軸。
-
-選定時に見るべき観点は次の4つ。
+### Region
+Region は管理階層ではなく、配置場所の選択軸。選定時に見るべき観点は次のとおり。
 
 - レイテンシ
 - 可用性/災害耐性
 - 法規制・データ所在
 - コスト
 
-Regionは後で修正コストが大きいため、
-最初に業務要件から逆算して決める。
+Region は後からの変更コストが大きいため、最初に要件から逆算して決める。
 
----
+### Resource
+Resource は VM や Storage などの実体。個別サービス名を覚えるだけでなく、「どの境界（Subscription / Resource Group / Region）で管理するか」とセットで考える。
 
-# 4. Resource
-
-ResourceはVM、Storage、DBなどの実体。
-
-設計上は「個別サービス」ではなく、
-「どの境界（Subscription/RG/Region）で管理するか」とセットで見る。
-
----
-
-# 5. 4要素をまとめて決める順番
-
+### 4要素を決める順番
 迷ったときは次の順で決めると崩れにくい。
 
 1. 事業責任と予算責任から Subscription を切る
@@ -91,16 +58,11 @@ ResourceはVM、Storage、DBなどの実体。
 3. 可用性と規制要件から Region を選ぶ
 4. 最後に Resource を配置する
 
----
-
-# まとめ
-
-4要素は用語暗記より「境界設計」として理解した方が使いやすい。
-
+## まとめ
 - Subscription：責任と課金の境界
 - Resource Group：運用とライフサイクルの境界
 - Region：地理・可用性・規制の境界
 - Resource：実装の最小単位
 
-次は、これらの境界を組織全体に広げる
-Management Group / RBACスコープ設計を整理する。
+## 次に学ぶこと
+次は、これらの境界を組織全体に広げるための Management Group と RBAC スコープ設計を整理する。

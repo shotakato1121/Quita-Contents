@@ -1,11 +1,6 @@
 ---
-title: AZ-104 学習ログ Day6：VNet Peering を理解する
-tags:
-  - Network
-  - Azure
-  - peering
-  - 学習記録
-  - vnet
+title: "AZ-104 学習ログ Day8：VNet Peering の基本"
+tags: [Azure, AZ104, 学習ログ, VNet, Peering]
 private: false
 updated_at: '2026-03-07T11:01:29+09:00'
 id: c1cb65ff3e321f95c586
@@ -14,166 +9,45 @@ slide: false
 ignorePublish: false
 ---
 
-# はじめに
+# AZ-104 学習ログ Day8：VNet Peering の基本
 
-AZ-104取得に向けた学習ログ。
+## はじめに
+VNet は独立したネットワークとして作成されるため、VNet 間の通信には接続手段が必要になる。今回は VNet Peering を整理する。
 
-これまでの学習内容：
+### これまでに学習した内容
+- VNet / Subnet / NSG の基本
+- NSG のルール設計
 
-- Day1：Azureの基本構造（Tenant / Subscription / Resource Group）
-- Day2：RBAC（Role Based Access Control）
-- Day3：Azure Storage
-- Day4：Virtual Network（VNet）
-- Day5：Network Security Group（NSG）
+## 本文
+### なぜ VNet 同士を接続するのか
+VNet は独立したネットワークのため、別 VNet のリソースとはそのままでは通信できない。そこで VNet 同士を接続する仕組みが必要になる。
 
-今回は **VNet Peering** を整理する。
+### VNet Peering とは
+VNet Peering は 2 つの VNet を接続する仕組み。設定すると相互通信が可能になる。
 
-VNet Peeringは
+### 通信経路
+Peering の通信は Azure バックボーンネットワークを通る。インターネットを経由しない。
 
-> 複数のVNetを接続する仕組み
+### アドレス空間の条件
+Peering を設定するには VNet のアドレス空間が重複していないことが必要。
 
-Azureネットワーク設計では頻繁に使われる重要な機能。
-
----
-
-# なぜVNet同士を接続するのか
-
-VNetは
-
-> 独立したネットワーク
-
-として作成される。
-
-例：
-VNet-A
-└ Web VM
-
-VNet-B
-└ DB VM
-
-この場合
-Web → DB
-の通信はできない。
-
-理由：
-
-- VNetは独立したネットワーク
-- ルーティングが存在しない
-
-そのため **VNet同士を接続する仕組み**が必要になる。
-
----
-
-# VNet Peeringとは
-
-VNet Peeringは
-
-> 2つのVNetを接続する仕組み
-
-Peeringを設定すると
-
-VNet-A
-↕
-VNet-B
-
-の通信が可能になる。
-
----
-
-# 通信経路
-
-VNet Peeringの通信は
-
-> Azureバックボーンネットワーク
-
-を通る。
-
-つまり
-
-- インターネットは通らない
-- Azure内部ネットワークで通信される
-
----
-
-# アドレス空間の条件
-
-Peeringを設定するには
-
-> VNetのアドレス空間が重複していない必要がある
-
-例：
+```
 VNet-A 10.0.0.0/16
 VNet-B 10.1.0.0/16
-
-
-この場合はPeering可能。
-
-一方
-VNet-A 10.0.0.0/16
-VNet-B 10.0.1.0/24
-
-のようにアドレスが重複する場合は設定できない。
-
----
-
-# Peeringの制限
-
-VNet Peeringには次の特徴がある。
+```
 
 ### Non-Transitive（経由接続できない）
+Peering は経由接続できない。例えば A-B と B-C があっても、A-C は別途 Peering を設定する必要がある。
 
-例：
-VNet-A ↔ VNet-B
-VNet-B ↔ VNet-C
+### 設計例
+Production と SharedServices を接続し、Development と SharedServices を接続するが、Production と Development は接続しない、といった構成がよく使われる。
 
+## まとめ
+- VNet は独立したネットワーク
+- VNet 間通信には VNet Peering を使う
+- 通信は Azure バックボーンを通る
+- アドレス空間の重複は不可
+- Peering は経由接続できない
 
-この場合
-VNet-A ↔ VNet-C
-の通信はできない。
-
-VNet-AとVNet-Cを通信させるには
-
-> 新しくPeeringを設定する必要がある
-
----
-
-# 設計例
-
-次の構成を考える。
-
-VNet-Production
-VNet-Development
-VNet-SharedServices
-
-要件：
-
-- Production → SharedServices 通信
-- Development → SharedServices 通信
-- Production ↔ Development 通信なし
-
-この場合の接続は
-Production ↔ SharedServices
-Development ↔ SharedServices
-の2つのPeeringを設定する。
-
----
-
-# 今日の学び
-
-- VNetは独立したネットワーク
-- VNet同士の通信にはVNet Peeringを使う
-- 通信はAzureバックボーンを通る
-- アドレス空間が重複するとPeeringできない
-- Peeringは経由接続できない
-
----
-
-# 次に学ぶこと
-
-次は **Private Endpoint / Service Endpoint** を学習予定。
-
-これは
-
-> AzureのPaaSサービスを安全に接続する仕組み
-
-であり、Azureネットワーク設計の重要な要素になる。
+## 次に学ぶこと
+次は Service Endpoint / Private Endpoint を整理する。

@@ -1,178 +1,78 @@
 ---
-title: AZ-104 学習ログ Day7：Service Endpoint と Private Endpoint を理解する
+title: AZ-104 学習ログ Day9：Service Endpoint と Private Endpoint の基本
 tags:
   - Network
   - Azure
-  - ServiceEndpoint
   - PrivateEndpoint
   - AZ104
+  - 学習ログ
 private: false
-updated_at: '2026-03-09T22:01:44+09:00'
+updated_at: '2026-03-12T22:05:23+09:00'
 id: 9fb1e8d81fad73e58c9d
 organization_url_name: null
 slide: false
 ignorePublish: false
 ---
 
-# はじめに
+# AZ-104 学習ログ Day9：Service Endpoint と Private Endpoint の基本
 
-AZ-104取得に向けた学習ログ。
+## はじめに
+PaaS サービスへの安全な接続方法として、Service Endpoint と Private Endpoint を整理する。
 
-これまでの学習内容：
+### これまでに学習した内容
+- VNet Peering の基本
+- NSG による通信制御
 
-- Day1：Azureの基本構造（Tenant / Subscription / Resource Group）
-- Day2：RBAC（Role Based Access Control）
-- Day3：Azure Storage
-- Day4：Virtual Network（VNet）
-- Day5：Network Security Group（NSG）
-- Day6：VNet Peering
+## 本文
+### PaaS への通常接続
+VM から PaaS に接続する場合、通常は Public Endpoint を使う。
 
-今回は **PaaSサービスへの安全な接続方法**である
-
-- Service Endpoint
-- Private Endpoint
-
-を整理する。
-
----
-
-# PaaSサービスへの通常接続
-
-AzureのVMからPaaSサービスに接続する場合、通常は次のような通信になる。
+```
 VM
 ↓
 Public Endpoint
 ↓
 Azure Storage / Azure SQL / Key Vault
+```
 
+DNS 名は Public IP に解決される。
 
-例えばAzure Storageに接続する場合、VMは次のようなDNS名を使用する。
+### Service Endpoint
+Service Endpoint は「VNet / Subnet からのアクセスだけを許可する」仕組み。
 
-mystorageaccount.blob.core.windows.net
+- Public Endpoint はそのまま利用
+- 対象は Subnet 単位
+- 通信は Azure バックボーンを経由
 
+### Private Endpoint
+Private Endpoint は PaaS を VNet 内の Private IP で利用できるようにする仕組み。Subnet 内に NIC として作成される。
 
-DNSがこの名前を **Public IPアドレス**に解決し、通信が行われる。
-
----
-
-# Service Endpoint
-
-Service Endpointは
-
-> VNetからPaaSのPublic Endpointへのアクセスを制限する仕組み
-
-Subnetに対して有効化する。
-VNet
-└ Subnet
-└ VM
-↓
-Public Endpoint
-↓
-PaaS
-
-
-特徴
-
-- Public Endpointはそのまま使用する
-- VNet/Subnetからのアクセスのみ許可できる
-- Azureバックボーンを経由して通信する
-
----
-
-# Private Endpoint
-
-Private Endpointは
-
-> PaaSサービスをVNet内のPrivate IPで利用できるようにする仕組み
-
-Subnet内に作成され、実体は **NIC**として作られる。
+```
 VNet
 ├ VM
 └ Private Endpoint (Private IP)
 ↓
 PaaS
+```
 
+### DNS の役割
+Private Endpoint では DNS が重要。通常は Public IP に解決される名前が、Private IP に解決されるように設定する。
 
-特徴
-
-- Private IPが割り当てられる
-- VMはPaaSのDNS名で接続する
-- DNSの名前解決がPrivate IPに変わる
-
----
-
-# DNSの役割
-
-Private EndpointではDNSの設定が重要になる。
-
-通常
-mystorageaccount.blob.core.windows.net
-↓
-Public IP
-
-
-Private Endpointを作成すると
-mystorageaccount.blob.core.windows.net
-↓
-Private IP
-
-に名前解決される。
-
-その結果
-VM
-↓
-Private IP
-↓
-Private Endpoint
-↓
-Storage
-
-
-という通信になる。
-
----
-
-# Service Endpoint と Private Endpoint の違い
-
+### Service Endpoint と Private Endpoint の違い
 | 観点 | Service Endpoint | Private Endpoint |
 |---|---|---|
-接続先 | Public IP | Private IP |
-DNS | 変更なし | Private IPに解決 |
-通信経路 | Azureバックボーン | VNet内部 |
-セキュリティ | 中 | 強い |
+| 接続先 | Public IP | Private IP |
+| DNS | 変更なし | Private IP に解決 |
+| 通信経路 | Azure バックボーン | VNet 内部 |
+| セキュリティ | 中 | 高 |
 
----
+### どちらを使うべきか
+より高いセキュリティが必要で Public Endpoint を使いたくない場合は Private Endpoint が選択されることが多い。
 
-# どちらを使うべきか
+## まとめ
+- Service Endpoint は Public Endpoint を使いながらアクセス制御する
+- Private Endpoint は Private IP で PaaS に接続する
+- Private Endpoint では DNS 設計が重要
 
-一般的には
-
-- **より高いセキュリティが必要**
-- **Public Endpointを使用したくない**
-
-場合は
-
-> Private Endpoint
-
-が選択される。
-
----
-
-# 今日の学び
-
-- Service EndpointはPublic Endpointを利用したままアクセス制御する仕組み
-- Private EndpointはPrivate IPでPaaSに接続する仕組み
-- Private EndpointではDNSの名前解決が重要
-- Private Endpointの方がよりセキュアな接続方法
-
----
-
-# 次に学ぶこと
-
-Azureネットワークの基礎が一通り理解できたため、次は
-
-- Virtual Machine
-- Availability Set
-- Scale Set
-
-などの **Compute領域**を学習予定。
+## 次に学ぶこと
+次は Compute 領域として Azure Virtual Machine と Load Balancer の基礎を整理する。

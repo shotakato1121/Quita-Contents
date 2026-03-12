@@ -1,54 +1,34 @@
 ---
-title: AZ-104 学習ログ Day5：Network Security Group（NSG）を理解する
+title: AZ-104 学習ログ Day7：Network Security Group（NSG）の基本
 tags:
   - Network
   - Azure
-  - 学習記録
   - NSG
   - AZ104
+  - 学習ログ
 private: false
-updated_at: '2026-03-07T10:41:07+09:00'
+updated_at: '2026-03-12T22:05:23+09:00'
 id: dc2c95e8c431e8d8ed83
 organization_url_name: null
 slide: false
 ignorePublish: false
 ---
 
-# はじめに
+# AZ-104 学習ログ Day7：Network Security Group（NSG）の基本
 
-AZ-104取得に向けた学習ログ。
+## はじめに
+Azure ネットワークの通信制御を行う NSG（Network Security Group）を整理する。
 
-これまでの学習内容：
+### これまでに学習した内容
+- VNet / Subnet / NIC の基本
+- 境界設計と可用性・観測性の考え方
 
-- Day1：Azureの基本構造（Tenant / Subscription / Resource Group）
-- Day2：RBAC（Role Based Access Control）
-- Day3：Azure Storage
-- Day4：Virtual Network（VNet）
+## 本文
+### NSG とは
+NSG は Azure ネットワークの通信を制御する仕組み。通信の許可・拒否をルールとして定義する。
 
-今回は **Azureネットワークの通信制御を行う NSG（Network Security Group）** を整理する。
-
----
-
-# NSGとは
-
-NSG（Network Security Group）は
-
-> Azureネットワークの通信を制御する仕組み
-
-ファイアウォールに近い役割を持つ。
-
-NSGでは
-
-- 通信の許可
-- 通信の拒否
-
-をルールとして定義できる。
-
----
-
-# NSGで定義できるルール
-
-NSGのルールは次の要素で構成される。
+### ルールの構成要素
+NSG のルールは次の要素で構成される。
 
 | 要素 | 内容 |
 |---|---|
@@ -58,134 +38,41 @@ NSGのルールは次の要素で構成される。
 | Protocol | TCP / UDP など |
 | Action | Allow / Deny |
 
-つまり
+「誰が・どこへ・どのポートで通信できるか」を明示する。
 
-誰が
-どこへ
-どのポートで
-通信できるか
+### 適用できる場所
+NSG は次の場所に適用できる。
 
-を制御する。
+- Subnet
+- NIC
 
----
+一般的には Subnet 単位で制御することが多い。
 
-# NSGはどこに適用できるか
-
-NSGは次の場所に適用できる。
-Subnet
-NIC
-
-構造イメージ：
-VNet
-└ Subnet
-└ VM
-└ NIC
-
-
-- Subnet：ネットワーク単位で通信制御
-- NIC：特定VMのみ通信制御
-
-一般的には
-
-> Subnet単位で制御することが多い
-
----
-
-# Inbound / Outbound
-
-NSGでは通信方向を指定できる。
+### Inbound / Outbound
+NSG は通信方向を指定できる。
 
 | 方向 | 意味 |
 |---|---|
 | Inbound | 外部から内部への通信 |
 | Outbound | 内部から外部への通信 |
 
-例：
-Internet → Web
-Inbound
+### Priority（優先順位）
+NSG ルールは Priority の小さい順に評価され、最初に一致したルールで判定が確定する。
 
-Web → DB
-Outbound
+### 既定ルール（代表例）
+既定ルールの代表例は次のとおり。
 
----
+- Inbound：VNet 内通信は許可、Azure Load Balancer からの受信は許可、その他は拒否
+- Outbound：VNet 内通信は許可、Internet への送信は許可、その他は拒否
 
-# Priority（優先順位）
+### Subnet と NIC の両方に NSG がある場合
+Subnet と NIC の両方に NSG が設定されている場合は、両方のルールを通過する必要がある。どちらかが拒否すると通信はブロックされる。
 
-NSGルールには **Priority** がある。
+## まとめ
+- NSG は Azure ネットワークの通信制御の基本
+- ルールは Priority 順で評価される
+- 既定ルールを踏まえて必要通信だけを許可する
+- Subnet と NIC の両方に NSG がある場合は両方が適用される
 
-ルールは
-
-> 数字が小さい順に評価される
-
-例：
-Priority 100 Allow HTTP
-Priority 200 Deny All
-
-この場合
-
-> HTTP通信は許可される
-
----
-
-# Defaultルール
-
-NSGには最初からデフォルトルールが存在する。
-
-代表的なもの：
-
-| 通信 | デフォルト |
-|---|---|
-| VNet内通信 | Allow |
-| Internet → VM | Deny |
-| VM → Internet | Allow |
-
-つまり
-
-- 同じVNet内のVMは通信可能
-- 外部からの通信は基本拒否
-
----
-
-# SubnetとNIC両方にNSGがある場合
-
-NSGが
-Subnet
-NIC
-
-両方に設定されている場合、
-
-> 両方のルールを通過する必要がある
-
-例：
-
-Subnet NSG
-Allow HTTP
-
-NIC NSG
-Deny HTTP
-
-
-この場合
-
-> HTTP通信は拒否される
-
----
-
-# 今日の学び
-
-- NSGはAzureの通信制御（ファイアウォール）
-- NSGはSubnetまたはNICに適用できる
-- ルールはPriority順に評価される
-- SubnetとNIC両方のNSGが適用される
-
----
-
-# 次に学ぶこと
-
-次は **VNet Peering** を学習予定。
-
-VNet Peeringは
-
-> 複数のVNetを接続する仕組み
-
-Azureネットワークを理解する上で重要な概念。
+## 次に学ぶこと
+次は VNet Peering を整理する。
