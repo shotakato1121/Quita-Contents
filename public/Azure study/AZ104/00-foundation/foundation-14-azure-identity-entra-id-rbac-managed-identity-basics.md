@@ -2,15 +2,13 @@
 title: AZ-104 学習ログ Day14：Azure Identity（Entra ID / RBAC / Managed Identity）
 tags:
   - Azure
-  - identity
-  - EntraID
   - RBAC
-  - ManagedIdentity
   - AZ104
   - 学習ログ
+  - EntraID
 private: false
-updated_at: '2026-03-17T21:07:26+09:00'
-id: d3a1c4b6f8e9a1b2c3d4
+updated_at: '2026-03-17T21:25:32+09:00'
+id: 9c03c191733e46baf558
 organization_url_name: null
 slide: false
 ignorePublish: false
