@@ -1,9 +1,14 @@
 ---
-title: "AZ-104 学習ログ Day13：Azure Backup / Site Recovery の基本"
-tags: [Azure, AZ104, 学習ログ, Backup, DisasterRecovery]
+title: AZ-104 学習ログ Day13：Azure Backup / Site Recovery の基本
+tags:
+  - Azure
+  - backup
+  - disasterRecovery
+  - AZ104
+  - 学習ログ
 private: false
-updated_at: null
-id: null
+updated_at: '2026-03-17T20:41:58+09:00'
+id: 6879899a6a64b3aa2570
 organization_url_name: null
 slide: false
 ignorePublish: false

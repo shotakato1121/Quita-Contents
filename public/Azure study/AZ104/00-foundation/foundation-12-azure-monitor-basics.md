@@ -1,9 +1,14 @@
 ---
-title: "AZ-104 学習ログ Day12：Azure Monitor の基本"
-tags: [Azure, AZ104, 学習ログ, AzureMonitor, Monitoring]
+title: AZ-104 学習ログ Day12：Azure Monitor の基本
+tags:
+  - Azure
+  - monitoring
+  - AzureMonitor
+  - AZ104
+  - 学習ログ
 private: false
-updated_at: null
-id: null
+updated_at: '2026-03-17T20:41:58+09:00'
+id: f8945dffd9fe2f66c254
 organization_url_name: null
 slide: false
 ignorePublish: false

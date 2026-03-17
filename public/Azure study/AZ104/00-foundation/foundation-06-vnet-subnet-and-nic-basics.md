@@ -1,8 +1,13 @@
 ---
-title: "AZ-104 学習ログ Day6：VNet / Subnet / NIC の基本"
-tags: [Azure, AZ104, 学習ログ, VNet, Network]
+title: AZ-104 学習ログ Day6：VNet / Subnet / NIC の基本
+tags:
+  - Network
+  - Azure
+  - vnet
+  - AZ104
+  - 学習ログ
 private: false
-updated_at: '2026-03-06T22:17:58+09:00'
+updated_at: '2026-03-17T20:41:58+09:00'
 id: 93fd4e87beac3f0d6903
 organization_url_name: null
 slide: false

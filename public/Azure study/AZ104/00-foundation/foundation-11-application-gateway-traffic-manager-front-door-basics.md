@@ -1,8 +1,13 @@
 ---
-title: "AZ-104 学習ログ Day11：Application Gateway / Traffic Manager / Front Door"
-tags: [Azure, AZ104, 学習ログ, ApplicationGateway, FrontDoor]
+title: AZ-104 学習ログ Day11：Application Gateway / Traffic Manager / Front Door
+tags:
+  - Azure
+  - ApplicationGateway
+  - FrontDoor
+  - AZ104
+  - 学習ログ
 private: false
-updated_at: '2026-03-11T21:32:18+09:00'
+updated_at: '2026-03-17T20:41:47+09:00'
 id: 8750add42450db207602
 organization_url_name: null
 slide: false

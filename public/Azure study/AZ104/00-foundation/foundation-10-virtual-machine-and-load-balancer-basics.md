@@ -1,8 +1,13 @@
 ---
-title: "AZ-104 学習ログ Day10：Azure Virtual Machine と Load Balancer の基本"
-tags: [Azure, AZ104, 学習ログ, VM, LoadBalancer]
+title: AZ-104 学習ログ Day10：Azure Virtual Machine と Load Balancer の基本
+tags:
+  - Azure
+  - VM
+  - loadbalancer
+  - AZ104
+  - 学習ログ
 private: false
-updated_at: '2026-03-10T21:30:30+09:00'
+updated_at: '2026-03-17T20:41:58+09:00'
 id: 097aaffcac89306e619f
 organization_url_name: null
 slide: false

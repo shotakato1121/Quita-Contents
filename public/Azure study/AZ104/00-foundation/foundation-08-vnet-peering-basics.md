@@ -1,8 +1,13 @@
 ---
-title: "AZ-104 学習ログ Day8：VNet Peering の基本"
-tags: [Azure, AZ104, 学習ログ, VNet, Peering]
+title: AZ-104 学習ログ Day8：VNet Peering の基本
+tags:
+  - Azure
+  - peering
+  - vnet
+  - AZ104
+  - 学習ログ
 private: false
-updated_at: '2026-03-07T11:01:29+09:00'
+updated_at: '2026-03-17T20:41:58+09:00'
 id: c1cb65ff3e321f95c586
 organization_url_name: null
 slide: false

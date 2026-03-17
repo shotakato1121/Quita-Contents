@@ -1,8 +1,13 @@
 ---
-title: "AZ-104 学習ログ Day4：RBAC（Role Based Access Control）の基本"
-tags: [Azure, AZ104, 学習ログ, RBAC, AccessControl]
+title: AZ-104 学習ログ Day4：RBAC（Role Based Access Control）の基本
+tags:
+  - Azure
+  - RBAC
+  - accesscontrol
+  - AZ104
+  - 学習ログ
 private: false
-updated_at: '2026-03-05T21:26:17+09:00'
+updated_at: '2026-03-17T20:41:47+09:00'
 id: 6b3042d39e289e0d024b
 organization_url_name: null
 slide: false
