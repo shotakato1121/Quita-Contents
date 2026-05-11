@@ -1,14 +1,14 @@
 ---
 title: クリーンコード学習 Day1：読みやすいコードの考え方
 tags:
-  - クリーンコード
-  - 可読性
   - プログラミング
   - 初心者
   - 学習メモ
+  - 可読性
+  - クリーンコード
 private: false
-updated_at: ''
-id: null
+updated_at: '2026-05-11T21:25:43+09:00'
+id: f5dd09f2caa402fc5d97
 organization_url_name: null
 slide: false
 ignorePublish: false
